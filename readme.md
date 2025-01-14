@@ -6,4 +6,4 @@ A Python implementation of the DES encryption algorithm.
 ## Installation
 
 ```bash
-pip install des-encryption
+pip install sps_crypto
