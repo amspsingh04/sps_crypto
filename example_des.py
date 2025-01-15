@@ -1,4 +1,4 @@
-from des import DES
+from sps_crypto import DES
 
 # Example usage
 plaintext = "0123456789ABCDEF"
