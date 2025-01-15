@@ -4,6 +4,7 @@ setup.py
 sps_crypto/DES.py
 sps_crypto/__init__.py
 sps_crypto/ciphers.py
+sps_crypto/socketing.py
 sps_crypto.egg-info/PKG-INFO
 sps_crypto.egg-info/SOURCES.txt
 sps_crypto.egg-info/dependency_links.txt

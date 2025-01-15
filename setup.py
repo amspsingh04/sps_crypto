@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="sps_crypto", 
-    version="1.0.3rc",  
+    version="1.0.3",  
     author="Shourya Pratap Singh",
     author_email="sp.singh@gmail.com",
     description="Python implementation of the cryptographic algos",
