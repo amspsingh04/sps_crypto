@@ -73,7 +73,7 @@ def initial_permutation(plaintext):
 def inverse_initial_permutation(data):
     return ''.join(data[i-1] for i in IPI)
 
-def des_encrypt(plaintext, key):
+def des_encrypt(plaintext, key="133457799BBCDFF1"):
     
     if(len(plaintext)<1 or len(key)!=16):
         raise ValueError

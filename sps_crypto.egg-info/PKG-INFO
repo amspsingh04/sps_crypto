@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: sps_crypto
-Version: 1.0.1
+Version: 1.0.2
 Summary: Python implementation of the cryptographic algos
 Home-page: https://github.com/amspsingh04/sps_crypto
 Author: Shourya Pratap Singh
@@ -14,10 +14,17 @@ License-File: LICENSE
 
 ## Functions available so far
 
+### Ciphers
+Implementation of the following algorithms:
+Caesar
+Vigenere
+Hill
+Playfair
+
 ### DES Encryption
 A Python implementation of the DES encryption algorithm.
 
 ## Installation
 
 ```bash
-pip install sps_crypto
+pip install sps-crypto
