@@ -117,6 +117,5 @@ def des_encrypt(plaintext, key="133457799BBCDFF1"):
     encrypted_hex = hex(int(encrypted_binary, 2))[2:].upper()
     return encrypted_hex
 
-print(des_encrypt('0123456789ABCDEF'))
-print(des_decrypt('85E813540F0AB405'))
+
 __all__ = ['des_encrypt','des_decrypt']
