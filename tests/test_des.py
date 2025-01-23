@@ -11,6 +11,13 @@ class TestDESEncryption(unittest.TestCase):
         expected_output = "85E813540F0AB405"  # Example expected output
         result = des_encrypt(plaintext, key)
         self.assertEqual(result, expected_output, "Hexadecimal input encryption failed")
+    
+    def test_hexadecimal_decrypt(self):
+        plaintext = "85E813540F0AB405"
+        key = "133457799BBCDFF1"
+        expected_output = "0123456789ABCDEF"  # Example expected output
+        result = des_decrypt(plaintext, key)
+        self.assertEqual(result, expected_output, "Hexadecimal input decryption failed")
 
     def test_string_input(self):
         plaintext = "Hello"  # Example plaintext

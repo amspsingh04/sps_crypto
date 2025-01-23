@@ -73,6 +73,26 @@ def initial_permutation(plaintext):
 def inverse_initial_permutation(data):
     return ''.join(data[i-1] for i in IPI)
 
+def des_decrypt(ciphertext, key="133457799BBCDFF1"):
+    if(len(ciphertext)<1 or len(key)!=16):
+        raise ValueError
+    try:
+        binary_cipher=bin(int(ciphertext,16))[2:].zfill(64)
+    except ValueError as e:
+        if isinstance(ciphertext,str):
+            binary_cipher=''.join(format(ord(c),'08b') for c in ciphertext)
+        if len(binary_cipher) < 64:
+            binary_cipher = binary_cipher.ljust(64,'0')
+    binary_cipher = ''.join(binary_cipher[i-1] for i in IP)
+    l,r=binary_cipher[:32],binary_cipher[32:]
+    subkeys=generate_keys(key)
+    for i in reversed(range(1,17)):
+        l,r=r,xor(l,f(r,subkeys[i-1]))
+    RL = r+l
+    decrypted_binary = ''.join(RL[i-1] for i in IPI)
+    decrypted_hex = hex(int(decrypted_binary, 2))[2:].upper().zfill(16)
+    return decrypted_hex 
+    
 def des_encrypt(plaintext, key="133457799BBCDFF1"):
     
     if(len(plaintext)<1 or len(key)!=16):
@@ -97,5 +117,6 @@ def des_encrypt(plaintext, key="133457799BBCDFF1"):
     encrypted_hex = hex(int(encrypted_binary, 2))[2:].upper()
     return encrypted_hex
 
-
-__all__ = ['des_encrypt']
+print(des_encrypt('0123456789ABCDEF'))
+print(des_decrypt('85E813540F0AB405'))
+__all__ = ['des_encrypt','des_decrypt']
