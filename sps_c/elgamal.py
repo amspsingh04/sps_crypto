@@ -37,7 +37,7 @@ def generate_large_prime(bits):
         p = random.getrandbits(bits)
         # Ensure it's odd and has the right bit length
         p |= (1 << bits - 1) | 1
-        if is_prime(p):
+        if is_eprime(p):
             return p
 
 def find_eprimitive_root(p):
@@ -121,35 +121,5 @@ def int_to_text(number):
     """Convert integer back to text"""
     return number.to_bytes((number.bit_length() + 7) // 8, 'big').decode('utf-8')
 '''
-def main():
-    print("ElGamal Encryption System")
-    print("------------------------")
-    
-    print("Generating keys...")
-    keys = generate_keys(256)
-    public_key = keys['public']
-    private_key = keys['private']
-    
-    print(f"Public Key (p, g, y): {public_key['p']}, {public_key['g']}, {public_key['y']}")
-    print(f"Private Key (p, x): {private_key['p']}, {private_key['x']}")
-    
-    message = input("\nEnter a message to encrypt: ")
-    message_int = text_to_int(message)
-    
-    print("\nEncrypting message...")
-    ciphertext = encrypt(public_key, message_int)
-    print(f"Ciphertext (c1, c2): {ciphertext}")
-    
-    print("\nDecrypting message...")
-    decrypted_int = decrypt(private_key, ciphertext)
-    decrypted_text = int_to_text(decrypted_int)
-    print(f"Decrypted message: {decrypted_text}")
-    
-    if decrypted_text == message:
-        print("\nSuccess! Original and decrypted messages match.")
-    else:
-        print("\nError! Decrypted message doesn't match original.")
 
-if __name__ == "__main__":
-    main()
 '''

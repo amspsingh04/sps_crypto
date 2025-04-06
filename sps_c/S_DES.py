@@ -92,13 +92,5 @@ def sdes_decrypt(ciphertext, key):
     plain = permute(temp, IP_INV)
     return "".join(map(str, plain))
 
-'''if __name__ == "__main__":
-    plaintext = "00101000"
-    key = "1100011110"
-    encrypted = sdes_encrypt(plaintext, key)
-    decrypted = sdes_decrypt(encrypted, key)
-
-    print("Plaintext:", plaintext)
-    print("Encrypted:", encrypted)
-    print("Decrypted:", decrypted)
+'''
 '''

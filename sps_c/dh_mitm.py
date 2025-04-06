@@ -283,18 +283,3 @@ def simulate_mitm_attack(p, g):
     # Mallory forwards modified response to Alice
     alice_gen.send(mallory_to_alice_msg)
 
-def main():
-    # Choose a prime number and its primitive root
-    p = 23  # A small prime for demonstration
-    g = 5   # A primitive root modulo 23
-    
-    print(f"Public parameters: prime p = {p}, generator g = {g}")
-    
-    # First simulate normal exchange
-    simulate_normal_exchange(p, g)
-    
-    # Then simulate with man-in-the-middle attack
-    simulate_mitm_attack(p, g)
-
-if __name__ == "__main__":
-    main()
