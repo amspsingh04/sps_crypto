@@ -1,7 +1,7 @@
 # tests/test_des.py
 
 import unittest
-from sps_crypto.DES import des_encrypt, des_decrypt
+from sps_c.DES import des_encrypt, des_decrypt
 
 class TestDESEncryption(unittest.TestCase):
 

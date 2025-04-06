@@ -1,7 +1,7 @@
 # tests/test_ciphers.py
 
 import unittest
-from sps_crypto import ciphers
+from sps_c import ciphers
 
 
 class TestCaesarCipher(unittest.TestCase):
