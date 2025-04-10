@@ -5,13 +5,13 @@ def Caesar(text, mode='e', key=5):
     for i in text:
         if i.isalpha():
             shift = ord('A') if i.isupper() else ord('a')
-            key_adjusted = key if mode == 'e' else -1*key
+            key_adjusted = key if mode == 'e' else -1 * key
             result += chr((ord(i) - shift + key_adjusted) % 26 + shift)
         else:
             result += i
     return result
 
-def Vigenere(text, mode='e', key = "best"):
+def Vigenere(text, mode='e', key="best"):
     key_length = len(key)
     result = ""
     key_index = 0
@@ -28,68 +28,73 @@ def Vigenere(text, mode='e', key = "best"):
             result += i
     return result
 
+def create_playfair_square(key):
+    key = key.replace('J', 'I').upper() + 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+    key = "".join(dict.fromkeys(key))  
+    grid = [[k for k in key[i:i+5]] for i in range(0, 25, 5)]
+    return grid
 
-class Hill:
-    def encrypt(plaintext: str, key_matrix: list) -> str:
-        alpha = "abcdefghijklmnopqrstuvwxyz"
-        plaintext = plaintext.lower().replace(" ", "")
-        plaintext += 'x' * ((len(key_matrix) - len(plaintext) % len(key_matrix)) % len(key_matrix))
-        ciphertext = ""
+def find_location(grid, char):
+    for i in range(5):
+        for j in range(5):
+            if grid[i][j] == char:
+                return i, j
 
-        for i in range(0, len(plaintext), len(key_matrix)):
-            block = plaintext[i:i + len(key_matrix)]
-            block_vector = [alpha.index(char) for char in block]
-            result_vector = np.dot(key_matrix, block_vector) % 26
-            ciphertext += ''.join(alpha[idx] for idx in result_vector)
+def playfair_encrypt(message: str, key: str) -> str:
+    playfair_square = create_playfair_square(key)
+    ciphertext = ''
+    message = "".join(filter(str.isalpha, message.upper())).replace('J', 'I')
 
-        return ciphertext
+    i = 0
+    while i < len(message) - 1:
+        if message[i] == message[i+1]:
+            message = message[:i+1] + 'X' + message[i+1:]
+        i += 1
 
-    def decrypt(ciphertext: str, inverse_key_matrix: list) -> str:
-        alpha = "abcdefghijklmnopqrstuvwxyz"
-        plaintext = ""
+    if len(message) % 2 == 1:
+        message += 'X'
 
-        for i in range(0, len(ciphertext), len(inverse_key_matrix)):
-            block = ciphertext[i:i + len(inverse_key_matrix)]
-            block_vector = [alpha.index(char) for char in block]
-            result_vector = np.dot(inverse_key_matrix, block_vector) % 26
-            plaintext += ''.join(alpha[idx] for idx in result_vector)
+    for i in range(0, len(message), 2):
+        digraph = message[i:i+2]
+        row1, col1 = find_location(playfair_square, digraph[0])
+        row2, col2 = find_location(playfair_square, digraph[1])
+        if row1 == row2:
+            sub1 = playfair_square[row1][(col1 + 1) % 5]
+            sub2 = playfair_square[row2][(col2 + 1) % 5]
+        elif col1 == col2:
+            sub1 = playfair_square[(row1 + 1) % 5][col1]
+            sub2 = playfair_square[(row2 + 1) % 5][col2]
+        else:
+            sub1 = playfair_square[row1][col2]
+            sub2 = playfair_square[row2][col1]
+        ciphertext += sub1 + sub2
+    return ciphertext
 
-        return plaintext
+def playfair_decrypt(ciphertext: str, key: str) -> str:
+    playfair_square = create_playfair_square(key)
+    message = ''
+    for i in range(0, len(ciphertext), 2):
+        digraph = ciphertext[i:i+2]
+        row1, col1 = find_location(playfair_square, digraph[0])
+        row2, col2 = find_location(playfair_square, digraph[1])
+        if row1 == row2:
+            sub1 = playfair_square[row1][(col1 - 1) % 5]
+            sub2 = playfair_square[row2][(col2 - 1) % 5]
+        elif col1 == col2:
+            sub1 = playfair_square[(row1 - 1) % 5][col1]
+            sub2 = playfair_square[(row2 - 1) % 5][col2]
+        else:
+            sub1 = playfair_square[row1][col2]
+            sub2 = playfair_square[row2][col1]
+        message += sub1 + sub2
 
-class Playfair:
-    def create_matrix(key: str) -> list:
-        key = ''.join(sorted(set(key.upper()), key=key.index))
-        alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
-        matrix = [char for char in key if char.isalpha()]
-        matrix += [char for char in alphabet if char not in matrix]
-        return [matrix[i:i + 5] for i in range(0, 25, 5)]
+    i = 0
+    while i < len(message) - 2:
+        if message[i] == message[i+2] and message[i+1] == 'X':
+            message = message[:i+1] + message[i+2:]
+        i += 1
 
-    def process(text: str, key: str, mode: str = 'e') -> str:
-        matrix = Playfair.create_matrix(key)
-        text = ''.join([c.upper() for c in text if c.isalpha()]).replace("J", "I")
-        if len(text) % 2 != 0:
-            text += 'X'
+    if message[-1] == 'X':
+        message = message[:-1]
 
-        digraphs = [text[i:i + 2] for i in range(0, len(text), 2)]
-        result = ""
-
-        for digraph in digraphs:
-            row1, col1 = Playfair.find_position(matrix, digraph[0])
-            row2, col2 = Playfair.find_position(matrix, digraph[1])
-
-            if row1 == row2:
-                shift = 1 if mode == 'e' else -1
-                result += matrix[row1][(col1 + shift) % 5] + matrix[row2][(col2 + shift) % 5]
-            elif col1 == col2:
-                shift = 1 if mode == 'e' else -1
-                result += matrix[(row1 + shift) % 5][col1] + matrix[(row2 + shift) % 5][col2]
-            else:
-                result += matrix[row1][col2] + matrix[row2][col1]
-
-        return result
-
-    def find_position(matrix: list, char: str) -> tuple:
-        for i, row in enumerate(matrix):
-            if char in row:
-                return i, row.index(char)
-        return -1, -1
+    return message
