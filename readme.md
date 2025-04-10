@@ -51,13 +51,15 @@ Requires Python version 3.6 or higher.
 
 Usage Examples
 Here are a few basic examples of how to use the library.
-Usage examples can be found in the examples/dir
+Usage examples can be found in the examples directory
 
 
 Author
-Shourya Pratap Singh - sp.singh@gmail.com
+Shourya Pratap Singh
+
 Project Links
 GitHub Repository: https://github.com/amspsingh04/sps_crypto
 Bug Reports: https://github.com/amspsingh04/sps_crypto/issues
+
 Contributing
 Contributions, issues, and feature requests are welcome. Please refer to the GitHub repository and issue tracker.
