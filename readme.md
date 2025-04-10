@@ -1,7 +1,7 @@
 # sps-crypto
 A Python library providing implementations of various cryptographic algorithms. This project includes classical ciphers, modern symmetric and asymmetric encryption algorithms, digital signatures, and related utilities. It is primarily intended for educational purposes and developers interested in exploring cryptography.
 
-**Note:** This library is currently in **Stable** status (version `1.0.7`).
+**Note:** This library is currently in **Stable** status (version `1.0.78`).
 
 ## Features
 
@@ -10,7 +10,6 @@ The library currently includes implementations for:
 **Classical Ciphers:**
 * Caesar Cipher
 * Vigenere Cipher
-* Hill Cipher
 * Playfair Cipher
 
 **Symmetric Encryption:**
@@ -50,12 +49,9 @@ pip install sps-crypto
 Requires Python version 3.6 or higher.
 
 Usage Examples
-Here are a few basic examples of how to use the library.
 Usage examples can be found in the examples directory
 
 
-Author
-Shourya Pratap Singh
 
 Project Links
 GitHub Repository: https://github.com/amspsingh04/sps_crypto

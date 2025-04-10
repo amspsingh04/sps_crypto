@@ -7,7 +7,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="sps_crypto",
-    version="1.0.7",  # Follow PEP 440 versioning
+    version="1.0.78",  # Follow PEP 440 versioning
     author="Shourya Pratap Singh",
     author_email="sp.singh@gmail.com",
     description="Pure-Python implementation of cryptographic algorithms (RSA, ElGamal, AES, DES, Diffie-Hellman)",

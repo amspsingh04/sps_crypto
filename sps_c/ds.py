@@ -142,7 +142,7 @@ class ElGamalDigitalSignature:
     def sign(message, private_key, public_key):
         """Sign a message using private key and public key"""
         p, x = private_key
-        _, g, _ = public_key  # Extract g from public key
+        _, g, _ = public_key
         hashed = CryptoUtils.hash_message(message) % (p - 1)
 
         while True:
@@ -152,7 +152,12 @@ class ElGamalDigitalSignature:
 
         r = pow(g, k, p)
         k_inv = CryptoUtils.modinv(k, p - 1)
-        s = (k_inv * (hashed - x * r)) % (p - 1)
+        s = (k_inv * ((hashed - x * r) % (p - 1))) % (p - 1)
+
+        # Ensure s is not 0
+        if s == 0:
+            return ElGamalDigitalSignature.sign(message, private_key, public_key)
+
         return r, s
 
 
