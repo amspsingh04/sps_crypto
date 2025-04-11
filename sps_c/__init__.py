@@ -1,4 +1,6 @@
 from .DES import des_encrypt, des_decrypt
+from .aes import aes_encrypt, aes_decrypt
+from .S_DES import sdes_decrypt, sdes_encrypt
 from .ciphers import Caesar,Vigenere,playfair_encrypt, playfair_decrypt
 from .socketing import client, server
 from .ds import RSADigitalSignature, ElGamalDigitalSignature
@@ -24,9 +26,10 @@ from .elgamal import (
     int_to_text
 )
 from .rsa import generate_rkeys, rencrypt, rdecrypt
-from .S_DES import sdes_encrypt, sdes_decrypt
 
 __all__ = ["des_encrypt", "des_decrypt",
+           "aes_encrypt", "aes_decrypt",
+           "sdes_decrypt", "sdes_encrypt",
            "Caesar", "Vigenere", "playfair_encrypt", "playfair_decrypt"
            "server", "client", 
            "RSADigitalSignature", "ElGamalDigitalSignature",

@@ -1,7 +1,7 @@
 # sps-crypto
 A Python library providing implementations of various cryptographic algorithms. This project includes classical ciphers, modern symmetric and asymmetric encryption algorithms, digital signatures, and related utilities. It is primarily intended for educational purposes and developers interested in exploring cryptography.
 
-**Note:** This library is currently in **Stable** status (version `1.0.78`).
+**Note:** This library is currently in **Stable** status (version `1.0.79`).
 
 ## Features
 
